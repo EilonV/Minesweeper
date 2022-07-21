@@ -6,8 +6,8 @@ function buildBoard() {
     // create objects with random numbers [{i,j},{i,j}]...
     for (var i = 0; i < gMineCount; i++) {
         rands.push(random = {
-            i: getRandomInt(0, 4),
-            j: getRandomInt(0, 4)
+            i: getRandomInt(0, gCols),
+            j: getRandomInt(0, gCols)
         })
         rands.push[random]
     }

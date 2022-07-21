@@ -18,12 +18,25 @@ var gGame = {
 }
 
 function init() {
-
     gBoard = buildBoard()
     checkGameOver()
     renderBoard(gBoard, '.board')
     console.log(gBoard)
     setMinesNegsCount()
+}
+
+function changeDifficutly(getDiff) {
+    gRows = +getDiff.value
+    gCols = +getDiff.value
+    if (getDiff.value == 4)
+        gMineCount = 2
+    else if (getDiff.value == 8)
+        gMineCount = 12
+    else if (getDiff.value == 12)
+        gMineCount = 30
+    init()
+    console.log('gMineCount ', gMineCount)
+
 }
 
 
@@ -135,7 +148,7 @@ function checkGameOver() {
     }
     if (mineMarkCount === gMineCount && markedBoxesCount === numCellCount) {
         gGame.isOn = false
-        elGameMsg.innerText = '🏆 YOU WIN 🏆'
+        elGameMsg.innerTet = '🏆 YOU WIN 🏆'
         elGameMsg.style.display = 'block'
     }
     else if (!gGame.isOn) {
@@ -146,8 +159,3 @@ function checkGameOver() {
 }
 
 
-function changeDifficutly(getDiff){
-   gRows = getDiff.value
-   gCols = getDiff.value
-   init()
-}
