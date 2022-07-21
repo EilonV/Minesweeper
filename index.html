@@ -12,10 +12,17 @@
 <body onload="init()">
 
     <h1 class="header">Minesweeper</h1>
-    <h2 class="timer">Timer:</h2>
-    <p class="gameStatus">💣GAME OVER💣</p>
-    <table class="board" oncontextmenu="return false"></table>
 
+    <div class="buttons">
+        <button onclick="changeDifficutly(this)" value="4">Easy</button>
+        <button onclick="changeDifficutly(this)" value="8">Medium</button>
+        <button onclick="changeDifficutly(this)" value="12">Hard</button>
+    </div>
+
+    <p class="timer">Timer:</p>
+    <p class="gameStatus">💣GAME OVER💣</p>
+
+    <table class="board" oncontextmenu="return false"></table>
 
     <script src="js/main.js"></script>
     <script src="js/util Eilon.js"></script>

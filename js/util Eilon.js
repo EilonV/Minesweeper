@@ -19,7 +19,7 @@ function buildBoard() {
         for (var j = 0; j < gCols; j++) {
 
             mat[i][j] = cell = {
-                type: BLANK,
+                type: NUMBER,
                 minesAroundcount: 4,
                 isShown: false,
                 isMine: false,
@@ -40,6 +40,7 @@ function buildBoard() {
 
     return mat
 }
+
 function renderBoard(mat, selector) {
 
     var strHTML = '<table border="0"><tbody>'
@@ -73,6 +74,30 @@ function countNeighbors(cellI, cellJ, mat) {
         }
     }
     return neighborsCount;
+}
+
+function changeNeighbors(cellI, cellJ, mat) {
+
+    if (mat[cellI][cellJ].minesAroundcount === 0) {
+        for (var i = cellI - 1; i <= cellI + 1; i++) {
+
+            if (i < 0 || i >= mat.length) continue;
+
+            for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+
+                if (i === cellI && j === cellJ) continue; //
+                if (j < 0 || j >= mat[i].length) continue;
+                var cellSelector = document.querySelector(`.cell-${i}-${j}`)
+                if (mat[i][j].type == NUMBER) {
+                    gBoard[i][j].isShown = true
+                    cellSelector.classList.add('clicked')
+                    cellSelector.style.fontSize = '20px'
+                    console.log(cellSelector)
+                }
+
+            }
+        }
+    }
 }
 
 function createMat(ROWS, COLS) {

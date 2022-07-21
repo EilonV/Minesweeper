@@ -1,4 +1,4 @@
-const BLANK = 0
+const NUMBER = 0
 const MINE = '*'
 
 var gBoard
@@ -18,6 +18,7 @@ var gGame = {
 }
 
 function init() {
+
     gBoard = buildBoard()
     checkGameOver()
     renderBoard(gBoard, '.board')
@@ -49,16 +50,19 @@ function cellClicked(elCell, i, j) {
             elCell.classList.add('clicked')
             elCell.style.fontSize = '20px'
 
+            changeNeighbors(i, j, gBoard)
+
             if (gBoard[i][j].isMine) {
 
                 // if a mine is clicked: display all mines
-                for (var o = 0; o < gRows; o++) {
-                    for (var k = 0; k < gCols; k++) {
-                        var mineSelector = document.querySelector(` .cell-${o}-${k}`)
-                        if (gBoard[o][k].isMine) {
-                            gBoard[o][k].isShown = true
+                for (var row = 0; row < gRows; row++) {
+                    for (var col = 0; col < gCols; col++) {
+                        var mineSelector = document.querySelector(` .cell-${row}-${col}`)
+                        if (gBoard[row][col].isMine) {
+                            gBoard[row][col].isShown = true
                             mineSelector.classList.add('clicked')
                             mineSelector.style.fontSize = '20px'
+                            gGame.isOn = false
                         }
                     }
                 }
@@ -111,6 +115,7 @@ function getRightClick(el) {
     }
 }
 
+
 function checkGameOver() {
     var mineMarkCount = 0
     var markedBoxesCount = 0
@@ -125,7 +130,6 @@ function checkGameOver() {
                     markedBoxesCount++
                 if (gBoard[i][j].isMarked && gBoard[i][j].isMine)
                     mineMarkCount++
-
             }
         }
     }
@@ -134,9 +138,16 @@ function checkGameOver() {
         elGameMsg.innerText = '🏆 YOU WIN 🏆'
         elGameMsg.style.display = 'block'
     }
+    else if (!gGame.isOn) {
+        elGameMsg.innerText = '💣 YOU LOSE 💣'
+        elGameMsg.style.display = 'block'
+    }
     console.log('markedBoxesCount: ', markedBoxesCount)
 }
 
-// function cellMarked(elCell) {
-//     gBoard[text[0]][text[1]].isMarked
-// }
+
+function changeDifficutly(getDiff){
+   gRows = getDiff.value
+   gCols = getDiff.value
+   init()
+}
