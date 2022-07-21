@@ -26,16 +26,16 @@ body {
     margin: auto;
 }
 
-.header{
+.header {
     text-align: center;
     font-size: 100px;
-    padding-top:50px;
-    margin:auto;
+    padding-top: 50px;
+    margin: auto;
     color: black;
-    font-family:monospace ;
+    font-family: monospace;
 }
 
-.timer{
+.timer {
     width: fit-content;
     height: fit-content;
     margin: auto;
@@ -43,6 +43,19 @@ body {
     text-align: center;
     color: black;
     font-size: 30px;
-    font-family:monospace ;
+    font-family: monospace;
 
+}
+
+.gameStatus {
+    background-color: black;
+    width: auto;
+    height: auto;
+    margin:auto;
+    margin-top:15px;
+    padding: 10px;
+    font-size: 3em;
+    font-family: monospace;
+    text-align: center;
+    display: none;
 }

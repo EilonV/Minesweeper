@@ -11,7 +11,7 @@ function buildBoard() {
         })
         rands.push[random]
     }
-    console.log('Mine locations: ',rands)
+    console.log('Mine locations: ', rands)
 
     for (var i = 0; i < gRows; i++) {
         mat.push([])
@@ -31,8 +31,8 @@ function buildBoard() {
     for (var i = 0; i < gMineCount; i++) {
         mat[rands[i].i][rands[i].j] = cell = {
             type: MINE,
-            minesAroundcount: -1,
-            isShown: true,
+            minesAroundcount: '*',
+            isShown: false,
             isMine: true,
             isMarked: false
         }
@@ -50,7 +50,7 @@ function renderBoard(mat, selector) {
 
             const cell = mat[i][j].minesAroundcount
             const className = 'cell cell-' + i + '-' + j
-            strHTML += `<td class="${className}" onClick="cellClicked(this, ${i}, ${j})">${cell}</td>`
+            strHTML += `<td class="${className}" onClick="cellClicked(this, ${i}, ${j})" oncontextmenu="getRightClick(this)" >${cell}</td>`
         }
         strHTML += '</tr>'
     }
@@ -87,27 +87,6 @@ function createMat(ROWS, COLS) {
     return mat
 }
 
-//print the mat to the DOM with classes and cell names
-function printMat(mat, selector) {
-
-    var strHTML = '<table border="0"><tbody>'
-    for (var i = 0; i < mat.length; i++) {
-
-        strHTML += '<tr>'
-        for (var j = 0; j < mat[0].length; j++) {
-
-            const cell = mat[i][j]
-            const className = `cell cell-${i}-${j}`
-
-            strHTML += `<td class="${className}">${cell}</td>`
-        }
-        strHTML += '</tr>'
-    }
-    strHTML += '</tbody></table>'
-
-    const elContainer = document.querySelector(selector)
-    elContainer.innerHTML = strHTML
-}
 
 // location such as: {i: 2, j: 7}
 function renderCell(location, value) {
@@ -120,47 +99,6 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min
 }
 
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-function generateRandomColor() {
-    var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-    return randomColor;
-    //random color will be freshly served
-}
-
-//build board with surrounding walls
-function buildBoard1() {
-    const size = 10
-    const board = []
-
-    for (var i = 0; i < size; i++) {
-        board.push([]) // board[i] = []
-
-        for (var j = 0; j < size; j++) {
-            board[i][j] = '*'
-
-            if (i === 0 || i === size - 1 ||
-                j === 0 || j === size - 1) {
-                board[i][j] = 'X'
-            }
-        }
-    }
-    return board
-}
-
-
-
-function isEmptyCell(coord) {
-    return gBoard[coord.i][coord.j] === ''
-}
-
 //returns current time HH:MM
 function getTime() {
     return new Date().toString().split(' ')[4];
@@ -170,19 +108,20 @@ function getTime() {
 function getTimer() {
 
     //add gElapsed in main and gStartingTime =  Date.now()
-
     gElapsed = Date.now() - gStartingTime
-    gElapsed = Math.floor(gElapsed/=1000)
+    gElapsed = Math.floor(gElapsed /= 1000)
     var elBoxes = document.getElementsByClassName('timer')
     elBoxes[0].innerText = 'Timer: ' + gElapsed
+
 }
 
 
 function startTimer() {
-    gInter = setInterval(getTimer,1000)
+    gInter = setInterval(getTimer, 1000)
 }
 
 function stopTimer() {
+
     clearInterval(gInter)
 }
 

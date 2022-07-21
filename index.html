@@ -9,14 +9,14 @@
     <title>Minesweeper EilonV</title>
 </head>
 
-<body onload="init()" onkeyup="getRightClick(event)">
-    
-    <h1 class="header">Minesweeper</h1>
+<body onload="init()">
 
+    <h1 class="header">Minesweeper</h1>
     <h2 class="timer">Timer:</h2>
-    <table class="board">
-        
-    </table>
+    <p class="gameStatus">💣GAME OVER💣</p>
+    <table class="board" oncontextmenu="return false"></table>
+
+
     <script src="js/main.js"></script>
     <script src="js/util Eilon.js"></script>
 
